@@ -6,7 +6,7 @@ services:
 script:
   - git clone https://github.com/cpuguy83/docker-nfs-server.git
   - cd docker-nfs-server
-  - sed -i '1s/.*/FROM resin/rpi-raspbian:jessie/' Dockerfile  
+  - sed -i '1s/.*/FROM resin\/rpi-raspbian:jessie/' Dockerfile  
   - DOCKER_TAG='latest'
   - if [ -n "$TRAVIS_TAG" ]; then DOCKER_TAG=$TRAVIS_TAG; fi  
   - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
