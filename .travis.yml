@@ -6,11 +6,12 @@ services:
 script:   
   - git clone https://github.com/cpuguy83/docker-nfs-server.git
   - cd docker-nfs-server
-  - sed -i '1s/.*/FROM resin\/rpi-raspbian:wheezy/' Dockerfile 
+  - sed -i '1s/.*/FROM resin\/rpi-raspbian:wheezy/' Dockerfile   
   # Avoid ERROR: invoke-rc.d: policy-rc.d denied execution of start. 
   - sed -i '3 i\RUN echo "#!/bin/sh\\nexit 0" > /usr/sbin/policy-rc.d' Dockerfile  
   - sed -i 's/RUN apt-get update -qq \&\& apt-get install -y nfs-kernel-server runit inotify-tools -qq/RUN apt-get update -qq \&\& apt-get install -y nfs-kernel-server inotify-tools/g' Dockerfile
-  - sed -i '4 i\RUN apt-get install -y runit' Dockerfile
+  - sed -i '4 i\RUN cat /etc/apt/sources.list' Dockerfile
+  - sed -i '5 i\RUN apt-get install -y runit' Dockerfile
   - DOCKER_TAG='latest'
   - if [ -n "$TRAVIS_TAG" ]; then DOCKER_TAG=$TRAVIS_TAG; fi  
   - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
