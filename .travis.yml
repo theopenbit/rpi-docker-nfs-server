@@ -12,7 +12,7 @@ script:
   - sed -i 's/RUN apt-get update -qq \&\& apt-get install -y nfs-kernel-server runit inotify-tools -qq/RUN apt-get update -qq \&\& apt-get install -y curl nfs-kernel-server inotify-tools/g' Dockerfile
   - sed -i '5 i\RUN apt-get install -y  fgetty ' Dockerfile
   #socklog-run runit
-  #- sed -i '5 i\RUN touch /etc/inittab' Dockerfile
+  - sed -i '5 i\RUN touch /etc/inittab' Dockerfile
   - sed -i '6 i\RUN curl -O http://archive.raspbian.org/raspbian/pool/main/r/runit/runit_2.1.1-6.2_armhf.deb' Dockerfile
   - sed -i '7 i\RUN dpkg -i runit_2.1.1-6.2_armhf.deb' Dockerfile
   - DOCKER_TAG='latest'
